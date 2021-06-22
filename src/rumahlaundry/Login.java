@@ -159,20 +159,25 @@ public class Login extends javax.swing.JFrame {
         
         try {
             Statement stat = connection.createStatement();
-            String sql = "SELECT * FROM MASTER_USER WHERE USERNAME = '" + textUsername.getText() + 
+            String sql = "SELECT * FROM MASTER_EMPLOYEE WHERE USERNAME = '" + textUsername.getText() + 
                     "' AND PASSWORD = '" + textPassword.getText() + "'";
             
             ResultSet result = stat.executeQuery(sql);
             if (result != null && result.next()) {
                 if (textUsername.getText().equals(result.getString("username"))
                         && textPassword.getText().equals(result.getString("password"))) {
-                    JOptionPane.showMessageDialog(null, "Welcome, " + textUsername.getText());
-                    Home home = new Home();
-                    home.setVisible(true);
-                    home.pack();
-                    home.setLocationRelativeTo(null);
-                    home.setDefaultCloseOperation(Login.EXIT_ON_CLOSE);
-                    setVisible(false);
+                    
+                    if ("Aktif".equals(result.getString("status"))) {
+                        JOptionPane.showMessageDialog(null, "Welcome, " + result.getString("name"));
+                        Home home = new Home();
+                        home.setVisible(true);
+                        home.pack();
+                        home.setLocationRelativeTo(null);
+                        home.setDefaultCloseOperation(Login.EXIT_ON_CLOSE);
+                        setVisible(false);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Username tidak aktif");
+                    }
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Username atau Password salah");
