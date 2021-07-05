@@ -699,22 +699,14 @@ public class Customer extends javax.swing.JFrame {
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         try {
-            Statement statSelect = connection.createStatement();
-            String sqlTransaction = "SELECT * FROM TRANSACTION WHERE CUSTOMER_ID = '" + textKodePelanggan.getText() + "'";
-            ResultSet result = statSelect.executeQuery(sqlTransaction);
-            if (result != null) {
-                JOptionPane.showMessageDialog(null, "Data Pelanggan tidak dapat dihapus !");
-                doReset();
-            } else {
-                String sqlDelete = "DELETE FROM MASTER_CUSTOMER where CUSTOMER_ID = ?";
-                PreparedStatement statDelete = connection.prepareStatement(sqlDelete);
-                statDelete.setString(1, textKodePelanggan.getText());
-                statDelete.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
-                doReset();
-                dataTable();
-            }
-        }catch (SQLException e){
+            String sqlDelete = "DELETE FROM MASTER_CUSTOMER where CUSTOMER_ID = ?";
+            PreparedStatement statDelete = connection.prepareStatement(sqlDelete);
+            statDelete.setString(1, textKodePelanggan.getText());
+            statDelete.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Data berhasil dihapus");
+            doReset();
+            dataTable();
+        } catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Data gagal dihapus" + e);
         }
     }//GEN-LAST:event_buttonDeleteActionPerformed

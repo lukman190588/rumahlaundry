@@ -1,0 +1,58 @@
+CREATE DATABASE `rumahlaundry`;
+
+CREATE TABLE `master_customer` (
+  `customer_id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_name` varchar(50) NOT NULL,
+  `customer_contact` varchar(20) NOT NULL,
+  `customer_address` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`customer_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `master_employee` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `contact` varchar(20) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `status` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `master_package` (
+  `package_id` varchar(20) NOT NULL,
+  `package_name` varchar(50) NOT NULL,
+  `package_price` decimal(12,0) NOT NULL,
+  `package_description` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`package_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `master_service` (
+  `service_id` varchar(20) NOT NULL,
+  `service_name` varchar(50) NOT NULL,
+  `service_price` decimal(12,0) NOT NULL,
+  `service_description` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`service_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `transaction_laundry` (
+  `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
+  `transaction_date` date NOT NULL,
+  `package_id` varchar(20) NOT NULL,
+  `service_id` varchar(20) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `total_weight` decimal(5,2) NOT NULL,
+  `total_price` decimal(12,0) NOT NULL,
+  `finish_date` date DEFAULT NULL,
+  `status` varchar(1) NOT NULL,
+  `payment_date` date DEFAULT NULL,
+  `delivery_date` date DEFAULT NULL,
+  PRIMARY KEY (`transaction_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+INSERT INTO rumahlaundry.master_employee (username,password,name,contact,address,status) VALUES
+	 ('admin','admin','ADMINISTATOR','0000000000','localhost','Aktif'),
+	 ('lukman','lukman','LUKMAN ARIZAL','081293141811','JALAN DUKUH V NO.69A','Aktif'),
+	 ('airlangga','airlangga123','AIRLANGGA RAMADHON','0000000000','JALAN PEMBAHARUAN II NO.22','Aktif'),
+	 ('reynald','reynald123','REYNALD PRIANDONO SOEMARNO','0000000000','JALAN CEMPAKA PUTIH IV NO.3B','Aktif'),
+	 ('ryan','ryan123','RYAN RIVALDI','081188119922','JALAN RAYA BOGOR NO.99','Aktif');

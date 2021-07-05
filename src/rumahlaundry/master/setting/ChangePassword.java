@@ -5,17 +5,59 @@
  */
 package rumahlaundry.master.setting;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import rumahlaundry.Home;
+import rumahlaundry.Login;
+import rumahlaundry.master.Customer;
+import rumahlaundry.master.Employee;
+import rumahlaundry.master.MasterPackage;
+import rumahlaundry.master.MasterService;
+import rumahlaundry.report.ReportCustomer;
+import rumahlaundry.report.ReportHistoryTransaction;
+import rumahlaundry.report.ReportTransaction;
+import rumahlaundry.transaction.TransactionClose;
+import rumahlaundry.transaction.TransactionOrder;
+import rumahlaundry.transaction.TransactionPayment;
+import rumahlaundry.transaction.TransactionService;
+import rumahlaundry.util.MyConnection;
+
 /**
  *
  * @author lukman.arizal
  */
 public class ChangePassword extends javax.swing.JFrame {
 
+    private final Connection connection = new MyConnection().connect();
     /**
      * Creates new form ChangePassword
      */
     public ChangePassword() {
         initComponents();
+        
+        try {
+            loadEmployee();
+        } catch (SQLException ex) {
+            Logger.getLogger(TransactionOrder.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    String passwordLama = "";
+    
+    private void loadEmployee() throws SQLException{
+        Statement stat = connection.createStatement();
+        String sql = "SELECT * FROM MASTER_EMPLOYEE WHERE USERNAME = 'lukman' ";
+        ResultSet result = stat.executeQuery(sql);
+        while (result.next()) {
+            textName.setText(result.getString("username"));
+            passwordLama = result.getString("password");
+        }
     }
 
     /**
@@ -27,6 +69,18 @@ public class ChangePassword extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jPasswordLama = new javax.swing.JPasswordField();
+        jPasswordBaru = new javax.swing.JPasswordField();
+        jPasswordKonfirmasi = new javax.swing.JPasswordField();
+        jButtonSave = new javax.swing.JButton();
+        jButtonClear = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        textName = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuTransaksi = new javax.swing.JMenu();
         jMenuItemTransaksiBaru = new javax.swing.JMenuItem();
@@ -48,6 +102,107 @@ public class ChangePassword extends javax.swing.JFrame {
         jMenuItemKeluar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(102, 204, 255));
+
+        jLabel1.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
+        jLabel1.setText("Password Lama");
+
+        jLabel2.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
+        jLabel2.setText("Password Baru");
+
+        jLabel3.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
+        jLabel3.setText("Konfirmasi Password");
+
+        jPasswordLama.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        jPasswordBaru.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        jPasswordKonfirmasi.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        jButtonSave.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
+        jButtonSave.setText("SAVE");
+        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveActionPerformed(evt);
+            }
+        });
+
+        jButtonClear.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
+        jButtonClear.setText("CLEAR");
+        jButtonClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClearActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Pengaturan Password");
+
+        jLabel5.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
+        jLabel5.setText("Username");
+
+        textName.setEnabled(false);
+        textName.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 22, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButtonSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonClear))
+                    .addComponent(jPasswordKonfirmasi)
+                    .addComponent(jPasswordBaru)
+                    .addComponent(jPasswordLama)
+                    .addComponent(textName, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jLabel4)
+                .addGap(72, 72, 72)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(textName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jPasswordLama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jPasswordBaru, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jPasswordKonfirmasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSave)
+                    .addComponent(jButtonClear))
+                .addContainerGap(245, Short.MAX_VALUE))
+        );
 
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jMenuBar1.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
@@ -191,11 +346,11 @@ public class ChangePassword extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 646, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 537, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -327,6 +482,40 @@ public class ChangePassword extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_jMenuItemKeluarActionPerformed
 
+    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
+        if (!jPasswordLama.getText().equals(passwordLama)) {
+            JOptionPane.showMessageDialog(null, "Password lama tidak sesuai");
+            return;
+        }
+        if (!jPasswordBaru.getText().equals(jPasswordKonfirmasi.getText())) {
+            JOptionPane.showMessageDialog(null, "Password Baru tidak sesuai");
+            return;
+        }
+        try {
+            String sql = "UPDATE MASTER_EMPLOYEE SET PASSWORD = ? WHERE USERNAME = ?";
+            PreparedStatement stat = connection.prepareStatement(sql);
+
+            stat.setString(1, jPasswordBaru.getText());
+            stat.setString(2, textName.getText());
+            stat.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Data berhasil diubah");
+            doReset();
+            jPasswordLama.requestFocus();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Data Gagal Disimpan" + e.getMessage());
+        }
+    }//GEN-LAST:event_jButtonSaveActionPerformed
+
+    private void doReset() {
+        jPasswordLama.setText("");
+        jPasswordBaru.setText("");
+        jPasswordKonfirmasi.setText("");
+    }
+    
+    private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
+        doReset();
+    }//GEN-LAST:event_jButtonClearActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -363,6 +552,13 @@ public class ChangePassword extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonClear;
+    private javax.swing.JButton jButtonSave;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemDataKaryawan;
     private javax.swing.JMenuItem jMenuItemDataLayanan;
@@ -382,5 +578,10 @@ public class ChangePassword extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuMaster;
     private javax.swing.JMenu jMenuPengaturan;
     private javax.swing.JMenu jMenuTransaksi;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField jPasswordBaru;
+    private javax.swing.JPasswordField jPasswordKonfirmasi;
+    private javax.swing.JPasswordField jPasswordLama;
+    private javax.swing.JTextField textName;
     // End of variables declaration//GEN-END:variables
 }

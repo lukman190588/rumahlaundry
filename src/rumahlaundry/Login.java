@@ -174,6 +174,8 @@ public class Login extends javax.swing.JFrame {
                         home.pack();
                         home.setLocationRelativeTo(null);
                         home.setDefaultCloseOperation(Login.EXIT_ON_CLOSE);
+                        home.setUsername(result.getString("username"));
+                        home.setPassword(result.getString("password"));
                         setVisible(false);
                     } else {
                         JOptionPane.showMessageDialog(null, "Username tidak aktif");

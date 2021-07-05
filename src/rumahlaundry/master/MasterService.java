@@ -37,7 +37,7 @@ public class MasterService extends javax.swing.JFrame {
     private DefaultTableModel tabmode;
     
     /**
-     * Creates new form Service
+     * Creates new form ServiceDto
      */
     public MasterService() {
         initComponents();
@@ -139,7 +139,6 @@ public class MasterService extends javax.swing.JFrame {
         jLabelKodeLayanan.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
         jLabelKodeLayanan.setText("Kode Layanan");
 
-        textKodeLayanan.setEnabled(false);
         textKodeLayanan.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
         textKodeLayanan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -689,11 +688,12 @@ public class MasterService extends javax.swing.JFrame {
             return;
         }
         try {
-            String sql = "INSERT INTO MASTER_SERVICE (SERVICE_NAME, SERVICE_PRICE, SERVICE_DESCRIPTION) VALUES (?,?,?)";
+            String sql = "INSERT INTO MASTER_SERVICE (SERVICE_ID, SERVICE_NAME, SERVICE_PRICE, SERVICE_DESCRIPTION) VALUES (?,?,?,?)";
             PreparedStatement stat = connection.prepareStatement(sql);
-            stat.setString(1, textNamaLayanan.getText());
-            stat.setString(2, textHargaLayanan.getText());
-            stat.setString(3, textAreaKeterangan.getText());
+            stat.setString(1, textKodeLayanan.getText());
+            stat.setString(2, textNamaLayanan.getText());
+            stat.setString(3, textHargaLayanan.getText());
+            stat.setString(4, textAreaKeterangan.getText());
             stat.executeUpdate();
             JOptionPane.showMessageDialog(null, "Data Berhasil Disimpan");
             doReset();

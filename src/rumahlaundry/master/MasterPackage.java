@@ -139,7 +139,6 @@ public class MasterPackage extends javax.swing.JFrame {
         jLabelKodePaket.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
         jLabelKodePaket.setText("Kode Paket");
 
-        textKodePaket.setEnabled(false);
         textKodePaket.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
         textKodePaket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -689,11 +688,12 @@ public class MasterPackage extends javax.swing.JFrame {
             return;
         }
         try {
-            String sql = "INSERT INTO MASTER_PACKAGE (PACKAGE_NAME, PACKAGE_PRICE, PACKAGE_DESCRIPTION) VALUES (?,?,?)";
+            String sql = "INSERT INTO MASTER_PACKAGE (PACKAGE_ID, PACKAGE_NAME, PACKAGE_PRICE, PACKAGE_DESCRIPTION) VALUES (?,?,?,?)";
             PreparedStatement stat = connection.prepareStatement(sql);
-            stat.setString(1, textNamaPaket.getText());
-            stat.setString(2, textHargaPaket.getText());
-            stat.setString(3, textAreaKeterangan.getText());
+            stat.setString(1, textKodePaket.getText());
+            stat.setString(2, textNamaPaket.getText());
+            stat.setString(3, textHargaPaket.getText());
+            stat.setString(4, textAreaKeterangan.getText());
             stat.executeUpdate();
             JOptionPane.showMessageDialog(null, "Data Berhasil Disimpan");
             doReset();

@@ -5,6 +5,20 @@
  */
 package rumahlaundry.master.setting;
 
+import rumahlaundry.Home;
+import rumahlaundry.Login;
+import rumahlaundry.master.Customer;
+import rumahlaundry.master.Employee;
+import rumahlaundry.master.MasterPackage;
+import rumahlaundry.master.MasterService;
+import rumahlaundry.report.ReportCustomer;
+import rumahlaundry.report.ReportHistoryTransaction;
+import rumahlaundry.report.ReportTransaction;
+import rumahlaundry.transaction.TransactionClose;
+import rumahlaundry.transaction.TransactionOrder;
+import rumahlaundry.transaction.TransactionPayment;
+import rumahlaundry.transaction.TransactionService;
+
 /**
  *
  * @author lukman.arizal
@@ -27,6 +41,7 @@ public class Profile extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuTransaksi = new javax.swing.JMenu();
         jMenuItemTransaksiBaru = new javax.swing.JMenuItem();
@@ -48,6 +63,19 @@ public class Profile extends javax.swing.JFrame {
         jMenuItemKeluar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(102, 204, 255));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 646, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 537, Short.MAX_VALUE)
+        );
 
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jMenuBar1.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
@@ -191,11 +219,11 @@ public class Profile extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 646, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 537, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -382,5 +410,6 @@ public class Profile extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuMaster;
     private javax.swing.JMenu jMenuPengaturan;
     private javax.swing.JMenu jMenuTransaksi;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
